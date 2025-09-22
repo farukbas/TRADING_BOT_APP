@@ -1,0 +1,9 @@
+streamlit
+pandas
+pandas-ta
+ccxt
+scikit-learn
+lightgbm
+joblib
+psycopg2-binary
+sqlalchemy
