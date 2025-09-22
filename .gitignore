@@ -1,0 +1,10 @@
+# Sanal ortam klasörünü yok say
+.venv/
+venv/
+
+# Streamlit'in gizli bilgiler dosyasını yok say
+.streamlit/secrets.toml
+
+# Python cache dosyalarını yok say
+__pycache__/
+*.pyc

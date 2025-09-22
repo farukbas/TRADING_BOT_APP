@@ -5,8 +5,16 @@ import pandas as pd
 
 # Veritabanı bağlantısını yöneten fonksiyon
 def get_db_connection():
-    # Bağlantı bilgileri Streamlit'in secrets yönetiminden güvenli bir şekilde alınır
-    db_url = st.secrets["postgres"]["url"]
+    # Vercel'de çalışırken ortam değişkenini, yerelde çalışırken secrets.toml'u kullanır
+    if "postgres" in st.secrets:
+        # Yerel geliştirme (secrets.toml okur)
+        db_url = st.secrets["postgres"]["url"]
+    elif "POSTGRES_URL" in st.secrets:
+        # Vercel'e deploy edildiğinde (Environment Variable okur)
+        db_url = st.secrets["POSTGRES_URL"]
+    else:
+        raise ValueError("Veritabanı bağlantı bilgisi bulunamadı. Lütfen secrets.toml veya ortam değişkenlerini kontrol edin.")
+    
     engine = sqlalchemy.create_engine(db_url)
     return engine
 
